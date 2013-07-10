@@ -1,4 +1,4 @@
-CyanogenMod 9.2.2 for P500 (ICS-4.0.4)
+CyanogenMod 9.2.3 for P500 (ICS-4.0.4)
 ======================================
 
 For full device changelogs and git access:
@@ -6,6 +6,29 @@ http://github.com/GenetICS
 
 DEVICE CHANGELOG
 ----------------
+
+### 9.2.3 (12 Jul 2013)
+(Security Advisories Release)
+
+* CVE-2013-2094: http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2013-2094
+  https://github.com/GenetICS/lge_kernel_msm7x27/commit/101685c0f39cc8e805770988275ae15502f5bcc6
+
+* Multiple issues in DIAG/KGSL system call handling (CVE-2012-4220, CVE-2012-4221, CVE-2012-4222)
+  https://www.codeaurora.org/projects/security-advisories/multiple-issues-diagkgsl-system-call-handling-cve-2012-4220-cve-2012
+  https://github.com/GenetICS/device_lge_p500/commit/ed5f638b98365e7cb6cfc7b65f1d24320521ef59
+  https://github.com/GenetICS/lge_kernel_msm7x27/commit/746864745d038c659220ee482fd009ca9c2a68bd
+  
+* Integer overflow in range check when mapping framebuffer memory (CVE-2013-2596)
+  https://www.codeaurora.org/projects/security-advisories/integer-overflow-range-check-when-mapping-framebuffer-memory-cve-2013-2596
+  https://github.com/GenetICS/lge_kernel_msm7x27/commit/c2ad0b2597cefcf2e720b2705a41ce7d37f6b556
+  
+* Uncontrolled memory mapping in camera driver (CVE-2013-2595)
+  https://www.codeaurora.org/projects/security-advisories/uncontrolled-memory-mapping-camera-driver-cve-2013-2595
+  https://github.com/GenetICS/lge_kernel_msm7x27/commit/b8a32b69336c9c84126e7ca67a39446327ab9017
+
+* Bug 8219321 aka “MasterKey” exploit
+  https://github.com/CyanogenMod/android_libcore/commit/afd853db62bf04b61ea99d7dc1f6f491602f56f7
+
 
 ### 9.2.2 FINAL (12 Apr 2013)
 
