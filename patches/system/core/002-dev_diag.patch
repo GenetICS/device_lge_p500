@@ -1,0 +1,49 @@
+diff --git a/include/private/android_filesystem_config.h b/include/private/android_filesystem_config.h
+index ebb9f48..0fb1d00 100644
+--- a/include/private/android_filesystem_config.h
++++ b/include/private/android_filesystem_config.h
+@@ -76,6 +76,7 @@
+ #define AID_NET_BW_STATS  3006  /* read bandwidth statistics */
+ #define AID_NET_BW_ACCT   3007  /* change bandwidth statistics accounting */
+ #define AID_QCOM_ONCRPC   3008  /* can read/write /dev/oncrpc files */
++#define AID_QCOM_DIAG     3009  /* can read/write /dev/diag */
+ 
+ #if defined(MOTOROLA_UIDS)
+ #define AID_MOT_OSH       5000  /* OSH */
+@@ -143,6 +144,7 @@ static const struct android_id_info android_ids[] = {
+     { "net_bw_stats", AID_NET_BW_STATS, },
+     { "net_bw_acct", AID_NET_BW_ACCT, },
+     { "qcom_oncrpc", AID_QCOM_ONCRPC, },
++    { "qcom_diag", AID_QCOM_DIAG, },
+ #if defined(MOTOROLA_UIDS)
+     { "mot_osh",   AID_MOT_OSH, },
+     { "mot_accy",  AID_MOT_ACCY, },
+diff --git a/rootdir/init.rc b/rootdir/init.rc
+index 042143b..de06b34 100644
+--- a/rootdir/init.rc
++++ b/rootdir/init.rc
+@@ -419,7 +419,7 @@ service ril-daemon /system/bin/rild
+     socket rild stream 660 root radio
+     socket rild-debug stream 660 radio system
+     user root
+-    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
++    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag qcom_diag
+ 
+ service surfaceflinger /system/bin/surfaceflinger
+     class main
+diff --git a/rootdir/ueventd.rc b/rootdir/ueventd.rc
+index a67d13b..c98c95a 100644
+--- a/rootdir/ueventd.rc
++++ b/rootdir/ueventd.rc
+@@ -17,8 +17,10 @@
+ # gpu driver for adreno200 is globally accessible
+ /dev/kgsl                 0666   root       root
+ 
++# the DIAG device node is not world writable/readable.
++/dev/diag                 0660   system     qcom_diag
++
+ # these should not be world writable
+-/dev/diag                 0660   radio      radio
+ /dev/diag_arm9            0660   radio      radio
+ /dev/android_adb          0660   adb        adb
+ /dev/android_adb_enable   0660   adb        adb
