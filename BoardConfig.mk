@@ -90,8 +90,8 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun/file
 BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun/file
 
-BOARD_CHARGING_CMDLINE_NAME := "lge.reboot"
-BOARD_CHARGING_CMDLINE_VALUE := "pwroff"
+#BOARD_CHARGING_CMDLINE_NAME := "lge.reboot"
+#BOARD_CHARGING_CMDLINE_VALUE := "pwroff"
 
 WITH_DEXPREOPT := true
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/lge/p500/releasetools/ota_from_target_files
