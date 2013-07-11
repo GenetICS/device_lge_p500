@@ -1,5 +1,4 @@
 DEVICE_PACKAGE_OVERLAYS := device/lge/p500/overlay
-$(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
@@ -16,7 +15,8 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+    frameworks/base/data/etc/com.stericsson.hardware.fm.receiver.xml:system/etc/permissions/com.stericsson.hardware.fm.receiver.xml
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/root/initlogo.rle:root/initlogo.rle \
@@ -36,6 +36,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/adreno_config.txt:system/etc/adreno_config.txt \
     $(LOCAL_PATH)/configs/AudioFilter.csv:system/etc/AudioFilter.csv \
     $(LOCAL_PATH)/configs/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+    $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/nvram.txt:system/etc/wl/nvram.txt \
     $(LOCAL_PATH)/configs/vold.fstab:system/etc/vold.fstab \
@@ -63,7 +64,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hdmi_out=false \
     debug.sf.hw=1 \
     debug.enabletr=false \
-    debug.composition.type=gpu \
+    debug.composition.type=mdp \
     debug.gr.numframebuffers=2 \
     debug.qctwa.statusbar=1 \
     debug.qctwa.preservebuf=1 \
@@ -105,7 +106,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
-    gps.p500 \
+    gps.msm7x27 \
+    librpc \
     lights.p500 \
     camera.msm7x27 \
     lgapversion
@@ -124,8 +126,35 @@ PRODUCT_PACKAGES += \
     HwaSettings
 
 PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
+    Effem \
+    libfmradio.bcm4325
+
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/root/checkbootreason:root/sbin/checkbootreason
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_ani_01.rle:root/chargerimages/battery_ani_01.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_ani_02.rle:root/chargerimages/battery_ani_02.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_ani_03.rle:root/chargerimages/battery_ani_03.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_ani_04.rle:root/chargerimages/battery_ani_04.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_ani_05.rle:root/chargerimages/battery_ani_05.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_bg.rle:root/chargerimages/battery_bg.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_charging_01.rle:root/chargerimages/battery_charging_01.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_charging_02.rle:root/chargerimages/battery_charging_02.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_charging_03.rle:root/chargerimages/battery_charging_03.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_charging_04.rle:root/chargerimages/battery_charging_04.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_charging_05.rle:root/chargerimages/battery_charging_05.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_charging_06.rle:root/chargerimages/battery_charging_06.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_wait_ani_01.rle:root/chargerimages/battery_wait_ani_01.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/battery_wait_ani_02.rle:root/chargerimages/battery_wait_ani_02.rle \
+    $(LOCAL_PATH)/chargemode/chargerimages/black_bg.rle:root/chargerimages/black_bg.rle \
+    $(LOCAL_PATH)/chargemode/chargerlogo:root/sbin/chargerlogo
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.themeId=TouchWiz \
+    persist.sys.themePackageName=com.thomassafca.theme.touchwiz.free
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/themes/com.thomassafca.theme.touchwiz.free.apk:system/app/com.thomassafca.theme.touchwiz.free.apk \
+    $(LOCAL_PATH)/prebuilt/themes/org.cerqueira.theme.Green.apk:system/app/org.cerqueira.theme.Green.apk
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
